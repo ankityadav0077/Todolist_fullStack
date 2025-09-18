@@ -1,0 +1,18 @@
+const express=require('express')
+const app=express()
+const connectDB=require('./config/DB_connections')
+connectDB()
+const userRouter=require('./routers/userRouter')
+const todoRouter=require('./routers/todoRouter')
+const {notFound,errorHandler}=require('./middleweres/errormiddleware')
+// console.log(userRouter)
+app.use(express.json())
+app.get("/",(req,res)=>{
+    res.status(200).json({message:"hello from server"})
+})
+app.use('/api/user',userRouter)
+app.use('/api/todo',todoRouter)
+console.log("from app.js")
+app.use(notFound)
+app.use(errorHandler)
+module.exports=app
