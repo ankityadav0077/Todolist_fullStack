@@ -1,11 +1,13 @@
 const express=require('express')
 const app=express()
 const connectDB=require('./config/DB_connections')
+const cors=require('cors')
 connectDB()
 const userRouter=require('./routers/userRouter')
 const todoRouter=require('./routers/todoRouter')
 const {notFound,errorHandler}=require('./middleweres/errormiddleware')
 // console.log(userRouter)
+app.use(cors())
 app.use(express.json())
 app.get("/",(req,res)=>{
     res.status(200).json({message:"hello from server"})

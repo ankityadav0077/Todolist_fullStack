@@ -1,10 +1,9 @@
 import { useState } from "react";
 
-export default function AuthComponent({ onClose, sideImg, name, inputs, onSubmit }) {
+export default function AuthComponent({ onClose, sideImg, name, inputs, onSubmit ,error}) {
   const [formData, setFormData] = useState(
     inputs.reduce((acc, input) => ({ ...acc, [input.type]: "" }), {})
   );
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.type]: e.target.value });
   };
@@ -46,7 +45,7 @@ export default function AuthComponent({ onClose, sideImg, name, inputs, onSubmit
                 className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
               />
             ))}
-
+            {error && <h1 className="text-red-600">{error}</h1>}
             <button
               type="submit"
               className="bg-blue-600 text-white rounded-lg p-3 hover:bg-blue-700 transition w-full"
