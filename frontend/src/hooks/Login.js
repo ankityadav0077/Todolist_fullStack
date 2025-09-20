@@ -10,7 +10,7 @@ function useLogin() {
     setError(null);
 
     try {
-      const response = await fetch("http://localhost:4000/api/user/login", {
+      const response = await fetch("http://10.18.41.189:4000/api/user/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: userEmail, password: userPassword })
@@ -22,10 +22,9 @@ function useLogin() {
         // ❌ server returned an error (like 400, 401, 500)
         throw new Error(data.message || "Something went wrong");
       }
-
-      setResult(data);  // ✅ store server response
+      setResult(data);  
       setLoading(false);
-      return data;      // return fresh data immediately
+      return data;   
     } catch (err) {
       setError(err.message || "Unexpected error");
       setLoading(false);
