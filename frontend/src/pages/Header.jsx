@@ -11,7 +11,7 @@ export default function Header(){
             <div className="text-2xl font-bold tracking-tight text-gray-900 m-2">Logo</div>
             <div className="text-xl text-center font-extrabold text-white">Stay productive, stay organized ✨</div>
             <div className="">
-                {!isUserPresent?<div className="sm:flex sm:gap-2"><Login/><Register/></div>:<div className="sm:flex sm:gap-2"><p>{userName}</p> <Logout/></div>}
+                {!isUserPresent?<div className="sm:flex sm:gap-2"><Login/><Register/></div>:<div className="sm:flex sm:gap-2"><div className="text-2xl  flex justify-center items-center text-black shadow-2xl font-bold">{userName}</div> <Logout/></div>}
             </div>
         </div>
         </>

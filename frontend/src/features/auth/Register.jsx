@@ -8,7 +8,8 @@ import {register} from "./authSlice"
 export default function Register(){
     const [isClicked, setIsClicked] = useState(false);
     const dispatch=useDispatch()
-    const {result,loading,error,hookRegister}=useRegister()
+    const [errorX,setErrorX]=useState(null)
+    const {result,loading,error,setError,hookRegister}=useRegister()
     const inputs = [
         { type: "text", placeholder: "Enter your name" },
         { type: "email", placeholder: "Enter your email" },
@@ -18,9 +19,15 @@ export default function Register(){
     console.log("signup data:", data);
     console.log("signup data:", typeof(hookRegister));
     const abc=await hookRegister({userName:data.text,userEmail:data.email,userPassword:data.password})
+    console.log("signup data from server:", abc,error);
     if (!error && abc){
-      register({isUserPresent:true, userName:abc.name, userEmail:abc.email, userToken:abc.token})
+      console.log("signup successfull")
       setIsClicked(false); // close modal after login
+      dispatch(register({isUserPresent:true, userName:abc.name, userEmail:abc.email, userToken:abc.token}))
+    }else if(error){
+      console.log("signup failed", error)
+      setErrorX(error)
+      setError(null) 
     }
   };
 
@@ -33,7 +40,7 @@ export default function Register(){
           name="SignUp"
           inputs={inputs}
           onSubmit={handleRegiteration}
-          error={error}
+          error={errorX}
         />
       ) : (
         <ButtonX buttonText="SignUp" onclick={() => setIsClicked(true)} />

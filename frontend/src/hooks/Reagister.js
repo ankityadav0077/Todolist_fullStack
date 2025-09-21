@@ -13,8 +13,9 @@ function useRegister(){
         body: JSON.stringify({ name:userName,email: userEmail, password: userPassword })
       })
         const data=await response.json()
-        if (!response.Created) {
+        if (!response.ok) {
         // ❌ server returned an error (like 400, 401, 500)
+        console.log(response,error)
         throw new Error(data.message || "Something went wrong");
       } 
       setResult(data);  // ✅ store server response
@@ -27,6 +28,6 @@ function useRegister(){
             return null
         }
     }
-    return {result,loading,error,hookRegister}
+    return {result,loading,error,setError,hookRegister}
 }
 export default useRegister
