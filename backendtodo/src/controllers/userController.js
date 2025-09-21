@@ -36,7 +36,7 @@ const loginUser=asyncHandler(async(req,res)=>{
     if (userExists){
         if (password==userExists.password){
             const token=generateToken(userExists._id,userExists.name)
-            res.status(200).send({message:'ok login successsfull',token})
+            res.status(200).send({message:'ok login successsfull',token,name:userExists.name})
         }
         else{
 
