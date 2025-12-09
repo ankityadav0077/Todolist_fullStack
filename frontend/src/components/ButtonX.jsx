@@ -1,9 +1,10 @@
-
-
-export default function ButtonX({buttonText='buttonX',onclick,css=''}){
+export default function ButtonX({ buttonText = 'Button', onclick, css = '' }) {
     return (
-        <>
-        <button onClick={()=>onclick()} className={` ${css} px-4 py-2 m-0.5 w-full bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 active:scale-95 transition` }>{buttonText}</button>
-        </>
+        <button
+            onClick={() => onclick()}
+            className={`px-6 py-2.5 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold rounded-lg hover:shadow-lg transform hover:scale-105 transition-all ${css}`}
+        >
+            {buttonText}
+        </button>
     )
-} 
+}

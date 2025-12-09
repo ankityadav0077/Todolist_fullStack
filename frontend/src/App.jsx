@@ -1,19 +1,15 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import Header from './pages/Header'
 import Footer from './pages/Footer'
 import Home from './pages/Home'
-function App() {
 
+function App() {
   return (
-    <>
-   <div className='bg-amber-300'>react app setup for todo</div>
-  <Header/>
-    <Home/>
-  <Footer/>
-    </>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
+      <Header />
+      <Home />
+      <Footer />
+    </div>
   )
 }
 
