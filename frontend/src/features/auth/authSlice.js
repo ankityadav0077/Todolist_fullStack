@@ -1,11 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  isUserPresent: false,
-  userName: "",
-  userEmail: "",
-  userToken: "",
+// Load auth state from localStorage
+const loadAuthState = () => {
+  try {
+    const serializedState = localStorage.getItem('authState');
+    if (serializedState === null) {
+      return {
+        isUserPresent: false,
+        userName: "",
+        userEmail: "",
+        userToken: "",
+      };
+    }
+    return JSON.parse(serializedState);
+  } catch (err) {
+    return {
+      isUserPresent: false,
+      userName: "",
+      userEmail: "",
+      userToken: "",
+    };
+  }
 };
+
+const initialState = loadAuthState();
 
 const authSlice = createSlice({
   name: "auth",
@@ -17,6 +35,8 @@ const authSlice = createSlice({
       state.userName = userName;
       state.userEmail = userEmail;
       state.userToken = userToken;
+      // Save to localStorage
+      localStorage.setItem('authState', JSON.stringify(state));
     },
     register: (state, action) => {
       // same as login
@@ -25,9 +45,16 @@ const authSlice = createSlice({
       state.userName = userName;
       state.userEmail = userEmail;
       state.userToken = userToken;
+      // Save to localStorage
+      localStorage.setItem('authState', JSON.stringify(state));
     },
-    logout: () => {
-      return { ...initialState }; // reset to initial state
+    logout: (state) => {
+      state.isUserPresent = false;
+      state.userName = "";
+      state.userEmail = "";
+      state.userToken = "";
+      // Clear localStorage
+      localStorage.removeItem('authState');
     },
   },
 });
